@@ -120,8 +120,40 @@ router.delete('/users/:id', function(req, res) {
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
+router.get('/', function(req, res) {
+  if (req.session) {
+    if ((req.sessoin.username) && (req.session.password)) {
+      redirect('/login');
+    }
+  }
+});
+
+router.get('/login', function(req, res) {
+  console.log('login post attempt');
+
+  UserFile.User.findOne({
+    username: req.session.username
+  }).then(function(user) {
+    if (user !== null) {
+      bcrypt.compare(req.session.password, user.password, function(err, result) {
+        if (result === true) {
+          console.log('user authenticated');
+          res.status(200).json('OK');
+        } else {
+          console.log('invalid user/password combo');
+          res.status(200).json('NO');
+        }
+      });
+    } else {
+      console.log('invalid username');
+      res.json('NO');
+    }
+  });
+});
+
 router.post('/login', function(req, res) {
   console.log('login post attempt');
+
   UserFile.User.findOne({
     username: req.body.username
   }).then(function(user) {
@@ -129,6 +161,10 @@ router.post('/login', function(req, res) {
       bcrypt.compare(req.body.password, user.password, function(err, result) {
         if (result === true) {
           console.log('user authenticated');
+          if ((!req.session.username) || (!req.session.username)) {
+            req.session.username = req.body.username;
+            req.session.password = req.body.passowrd;
+          }
           res.status(200).json('OK');
         } else {
           console.log('invalid user/password combo');
