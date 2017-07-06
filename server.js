@@ -13,9 +13,10 @@ var specialHashRegex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname '/public'));
 
 app.use(require('./routes'));
 
-app.listen(3000);
+var port = process.env.PORT || 8080;
+app.listen(port);
 console.log('server running on port 3000');
