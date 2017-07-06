@@ -6,6 +6,7 @@ var Deck = require('./db/models/deck');
 
 var bodyParser = require('body-parser');
 
+
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -119,6 +120,7 @@ var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
 router.post('/login', function(req, res) {
+  console.log('login post attempt');
   UserFile.User.findOne({
     username: req.body.username
   }).then(function(user) {
@@ -163,6 +165,7 @@ router.post('/signup', function(req, res) {
     }
   });
 });
+
 
 // (╯°□°）╯︵ ┻━┻       (you don't actually need it for anything. it was a joke)
 
