@@ -76,6 +76,22 @@ angular.module('flash-card')
     console.log('this.deck: ', this.deck);
   }
 
+  this.resetState = () => {
+    this.showPrev = false;
+    if(this.shuffledDeck.length === 1) {
+      this.showNext = false;
+    } else {
+      this.showNext = true;
+    }
+
+    this.current = this.shuffledDeck[0];
+    this.front = true;
+    this.flipped = false;
+
+    this.counter = 0;
+
+  };
+
   this.toggleCardsViewed = (view) => {
 
     if (view === "hide") {
@@ -84,9 +100,11 @@ angular.module('flash-card')
       });
 
       this.shuffledDeck = viewCard;
+      this.resetState();
       console.log('show matching', this.shuffledDeck)
     } else {
       this.shuffledDeck = shuffleDeck(this.deck.cards);
+      this.resetState();
       console.log('show all', this.shuffledDeck)
     }
 
