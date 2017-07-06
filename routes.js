@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 });
 
@@ -166,6 +167,10 @@ router.post('/signup', function(req, res) {
   });
 });
 
+router.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
 
 // (╯°□°）╯︵ ┻━┻       (you don't actually need it for anything. it was a joke)
 
