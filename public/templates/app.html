@@ -1,6 +1,9 @@
 <div ng-controller="AppCtrl as app" class="container">
   <h3>Choose a deck</h3>
-
+  <div id="checkboxes">
+    <label><input type="checkbox" name="selfDeckFilter" ng-model="app.showSelfDecks" ng-click="app.updateDecks()" checked> Show own decks</label>
+    <label><input type="checkbox" name="publicDeckFilter" ng-model="app.showPublicDecks" ng-click="app.updateDecks()"> Show public decks</label>
+  </div>
   <table class="table table-striped table-bordered table-hover">
     <tr ng-if="app.decks.length !== 0" ng-repeat="deck in app.decks track by $index" class="deck-list-entry">
       <td>{{ deck.deckname }}</td>

@@ -2,6 +2,21 @@ angular.module('flash-card')
 .controller('AppCtrl', function($http, $timeout) {
   var that = this;
   var currentUser = localStorage.getItem('currentUser');
+  this.showSelfDecks = true;
+  this.showPublicDecks = false;
+  this.updateDecks = function() {
+    $http.get('/decks', {
+        params: {username: loginName,
+            showUser: this.showSelfDecks,
+            showPublic: this.showPublicDecks
+          }
+        }).then(function(response) {
+          console.log('then callback of updateDecks',localStorage.getItem('decks'));
+          localStorage.setItem('decks', JSON.stringify(response.data));
+          console.log('after set localStorage');
+          that.setDecks();
+        }, function(error) {console.error(error);});
+  };
   this.setDecks = function() {
       that.decks = JSON.parse(localStorage.getItem('decks'));
       console.log('setDecks called. this.decks: ', that.decks);

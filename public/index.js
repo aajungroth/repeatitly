@@ -24,6 +24,10 @@ angular.module('flash-card', ['ngRoute'])
         templateUrl: './templates/createPage.html',
         controller: 'CreatePageCtrl'
       }).
+      when('/public', {
+        templateUrl: './templates/publicDeckPage.html',
+        controller: 'PublicDeckPageCtrl'
+      }).
       when('/edit', {
         templateUrl: './templates/editPage.html',
         controller: 'EditPageCtrl'
