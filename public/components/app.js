@@ -1,12 +1,12 @@
 angular.module('flash-card')
 .controller('AppCtrl', function($http, $timeout) {
   var that = this;
-  var currentUser = localStorage.getItem('currentUser');
+  this.currentUser = localStorage.getItem('currentUser');
   this.showSelfDecks = true;
   this.showPublicDecks = false;
   this.updateDecks = function() {
     $http.get('/decks', {
-        params: {username: loginName,
+        params: {username: this.currentUser,
             showUser: this.showSelfDecks,
             showPublic: this.showPublicDecks
           }
@@ -31,7 +31,7 @@ angular.module('flash-card')
     $http.delete('/decks/' + id).then(function() {
       $http.get('/decks', {
         params: {
-          username: currentUser
+          username: this.currentUser
         }
       }).then(function(res) {
         localStorage.setItem('decks', JSON.stringify(res.data));
@@ -45,7 +45,7 @@ angular.module('flash-card')
     });
   }
 };
-  if (currentUser === null) {
+  if (this.currentUser === null) {
     // this is to make the client-side wait for the public decks to arrive before setting this.decks
     console.log('you are not signed in');
     $timeout(function() {that.setDecks();}, 100);
