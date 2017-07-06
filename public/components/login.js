@@ -3,18 +3,20 @@ angular.module('flash-card')
 .controller('LoginCtrl', function(loginSvc, $location, $http){
 
   this.login = function() {
+    console.log('trying to signin frontend');
     var that = this;
     loginName = this.loginName;
     loginPw = this.loginPw;
     loginSvc.login(loginName, loginPw, function(res) {
       if (res.error) {
+        console.log('lol you errored');
         console.error(res.error);
       } else if (res.data === 'OK') {
         $http.get('/decks', {params: {username: loginName}}).then(function(response) {
           localStorage.setItem('currentUser', loginName);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        }, function(error) {console.error(error);});
+        }, function(error) {console.log('lol its an error gg'); console.error(error);});
       } else if (res.data === 'NO') {
         alert('Incorrect username or password, please try again.');
         that.loginName = '';
@@ -63,17 +65,20 @@ angular.module('flash-card')
 })
 .service('loginSvc', function($http) {
   this.login = function(username, password, callback) {
-    var url = 'http://localhost:3000/login';
+    console.log('login service call');
+    var url = '/login';
     $http.post(url, JSON.stringify({username: username, password:password}))
       .then(function successCallback(response) {
+        console.log('then for login service call');
         callback(response);
       },
       function errorCallback(response) {
+        console.log('login service error call');
         callback(response);
       });
   };
   this.signup = function(username, password, callback) {
-    var url = 'http://localhost:3000/signup';
+    var url = '/signup';
     $http.post(url, JSON.stringify({username: username, password:password}))
       .then(function successCallback(response) {
         callback(response);

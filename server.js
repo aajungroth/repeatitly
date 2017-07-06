@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var app = express();
 
@@ -16,5 +17,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(require('./routes'));
 
-app.listen(3000);
-console.log('server running on port 3000');
+var port = process.env.PORT || 8088;
+app.listen(port);
+console.log('server running on port ', port);
