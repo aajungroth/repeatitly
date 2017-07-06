@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 
 
 //mongooseURI = 'mongodb://localhost/flashcardsdb';
-exports.mongooseURI = process.env.MONGODB_URI
-mongoose.connect(exports.mongooseURI);
+
+mongooseURI = process.env.MONGODB_URI
+mongoose.connect(mongooseURI);
 
 var db = mongoose.connection;
 

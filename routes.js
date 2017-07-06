@@ -167,10 +167,6 @@ router.post('/signup', function(req, res) {
   });
 });
 
-router.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
-});
 
 // (╯°□°）╯︵ ┻━┻       (you don't actually need it for anything. it was a joke)
 
