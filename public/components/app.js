@@ -22,6 +22,7 @@ angular.module('flash-card')
       console.log('setDecks called. this.decks: ', that.decks);
   };
   this.getDeck = function(deck){
+    console.log('deck in app.js: ', deck);
     localStorage.setItem('currentDeck', JSON.stringify(deck));
   };
   this.handleDelete = function(deck) {

@@ -64,6 +64,23 @@ angular.module('flash-card')
     resetConditionToInitialState['handlePrev'](this);
   };
 
+  this.rateCard = (status) => {
+    console.log('this.current.status before: ', this.current.status);
+    this.current.status = status;
+    console.log('this.current.status after: ', this.current.status);
+    // console.log('this.current: ', this.current);
+    // console.log('this.deck: ', this.deck);
+  }
+
+  this.toggleCardsViewed = (view) => {
+    console.log('THIS DECK', this.shuffledDeck)
+    var currentDeck = this.shuffleDeck;
+    currentDeck.forEach(function(card) {
+       console.log(card)
+    })
+
+  };
+
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
@@ -135,9 +152,17 @@ angular.module('flash-card')
         }
       }
     });
-    $http.put('/decks/', this.deck).then(function() {
-      $location.path('/app');
-    });
+    $http.put('/decks/', this.deck, {params: {username: localStorage.getItem('currentUser')}}).then(function() {
+      $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
+        console.log('getting decks', response);
+        localStorage.setItem('decks', JSON.stringify(response.data));
+        $location.path('/app');
+      }, function(err) {console.error('handleSave, EDIT', err);});
+    }, function(err) {console.error(err);});
+    //uncomment if test fails --> john's note
+    // $http.put('/decks/', this.deck).then(function() {
+    //   $location.path('/app');
+    // });
   };
 
   // initialize the first card to check for whether to highlight

@@ -1,7 +1,7 @@
 angular.module('flash-card')
   .controller('EditPageCtrl', function($http, $location){
     var that = this;
-    this.newCard = {plaintextFront: true, plaintextBack: true};
+    this.newCard = {plaintextFront: true, plaintextBack: true, status: false};
     //***** add more of the default schema ****
     this.deck = JSON.parse(localStorage.getItem('currentDeck'));
     this.addCard = function(newCard) {
@@ -9,7 +9,7 @@ angular.module('flash-card')
         alert("Please fill out a card");
       } else {
         this.deck.cards.push(this.newCard);
-        this.newCard = {plaintextFront: true, plaintextBack: true};
+        this.newCard = {plaintextFront: true, plaintextBack: true, status: false};
         $('#editQuestionField').focus();
       }
       console.log('this.deck----', this.deck);

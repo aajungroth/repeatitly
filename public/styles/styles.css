@@ -55,6 +55,11 @@ td {
   padding: 3em;
 }
 
+.studyView {
+  display: flex;
+  justify-content:center;
+}
+
 .codeToggleBtn {
   float: right;
   clear: both;
@@ -162,4 +167,8 @@ form > * {
   0%   {opacity: 0;}
   50%  {opacity: 1;}
   100% {opacity: 0;}
+}
+
+.options {
+  float: right;
 }
