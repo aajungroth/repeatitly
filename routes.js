@@ -14,13 +14,34 @@ router.use(function(req, res, next) {
 
 //retrieve all decks
 router.get('/decks', function(req, res) {
+  console.log('get decks query: ',req.query);
   var username = req.query.username;
   if (req.query.username === 'null') {
     var username = null;
   }
   console.log('username', username);
-  Deck.find({username: username})
-    .then(function(err, decks) {
+  var params = [];
+  if (!req.query.hasOwnProperty('showUser')) {
+    req.query.showUser = 'true';
+  }
+  if (req.query.showUser === 'true') {
+    console.log('setting user to ', req.query.username);
+    params.push({username: req.query.username});
+  } else {
+    console.log('not showing user');
+    params.push({username: null});
+  }
+
+  if (req.query.showPublic === 'true') {
+    params.push({public: true});
+  }
+  console.log('params: ',params);
+
+  var query = Deck.find({username: params[0].username})
+    if (params.length === 2 && params[1].public === true) {
+      query = Deck.find({$or: params});
+    }
+    query.exec(function(err, decks) {
       if (err) { // this is not an error per se but actually a deck
         console.error(err);
         res.status(202).send(err);
