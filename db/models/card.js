@@ -5,9 +5,13 @@ var db = require('../config');
 var CardSchema = new Schema({
   front: String,
   back: String,
-  progress: Number,
-  age: Number,
-  effort: Number,
+  status: {
+    type: Boolean,
+    default: false,
+  },
+  // progress: Number,
+  // age: Number,
+  // effort: Number,
   plaintextFront: {
     type: Boolean,
     default: true
