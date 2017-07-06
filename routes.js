@@ -171,7 +171,6 @@ router.get('/logout', function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
-
 // (╯°□°）╯︵ ┻━┻       (you don't actually need it for anything. it was a joke)
 
 module.exports = router;
