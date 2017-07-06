@@ -7,7 +7,7 @@ var CardSchema = new Schema({
   back: String,
   status: {
     type: Boolean,
-    default: false,
+    default: false
   },
   // progress: Number,
   // age: Number,

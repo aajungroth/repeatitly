@@ -64,6 +64,23 @@ angular.module('flash-card')
     resetConditionToInitialState['handlePrev'](this);
   };
 
+  this.rateCard = (status) => {
+    console.log('this.current.status before: ', this.current.status);
+    this.current.status = true;
+    console.log('this.current.status after: ', this.current.status);
+    console.log('this.current: ', this.current);
+    console.log('this.deck: ', this.deck);
+  }
+
+  this.toggleCardsViewed = (view) => {
+    console.log('THIS DECK', this.shuffledDeck)
+    var currentDeck = this.shuffleDeck;
+    currentDeck.forEach(function(card) {
+       console.log(card)
+    })
+
+  };
+
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
