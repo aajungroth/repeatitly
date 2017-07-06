@@ -23,7 +23,7 @@ store.on('error', function(error) {
   console.errror(error);
 });
 
-// see routes line 144 for description
+// see end of routes.js for description
 var specialHashRegex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 
 app.use(bodyParser.json());
