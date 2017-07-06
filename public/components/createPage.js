@@ -3,7 +3,7 @@ angular.module('flash-card')
   var currentUser = localStorage.getItem('currentUser');
   this.newDeck = {username: currentUser};
   this.newDeck.cards = [];
-  this.newCard = {plaintextFront: true, plaintextBack: true};
+  this.newCard = {plaintextFront: true, plaintextBack: true, status: false};
 
 
   this.addCard = function(newCard) {
@@ -11,7 +11,8 @@ angular.module('flash-card')
       alert("Please fill out a card");
     } else {
       this.newDeck.cards.push(newCard);
-      this.newCard = {plaintextFront: true, plaintextBack: true};
+      console.log('newCard: ', newCard);
+      this.newCard = {plaintextFront: true, plaintextBack: true, status: false};
       $('#createQuestionField').focus();
     }
   };
@@ -25,6 +26,7 @@ angular.module('flash-card')
       $http.post('/decks?username=' + localStorage.getItem('currentUser'), this.newDeck).then(function() {
         $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
           localStorage.setItem('decks', JSON.stringify(response.data));
+          console.log('response.data: ', response.data);
           $location.path('/app');
         }, function(err) {console.error('handleSave, CREATE', err);});
       });

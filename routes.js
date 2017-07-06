@@ -53,8 +53,10 @@ router.get('/decks', function(req, res) {
 });
 
 router.post('/decks', function(req, res) {
+  console.log('inside post');
   // console.log('POST', req.body); => CONFIRMS THAT POST GOES THROUGH
   Deck.create(req.body).then(function(deck) {
+    console.log('deck: ', deck);
     // console.log('DECK', deck); => CONFIRMS THAT DECK IS SAVED SUCCESSFULLY
     res.json(deck);
   });
