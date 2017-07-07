@@ -108,4 +108,23 @@ angular.module('flash-card')
         callback(response);
       });
   };
-});
+  this.loginReturnPromise = function(username, password) {
+    return $http.post('/login', JSON.stringify({username: username, password:password}));
+  }
+})
+  .factory('Person', function ($http) {
+  return function Person (name) {
+    this.name = name;
+    this.create = function () {
+      return $http.post('/people', this);
+    };
+  };
+})
+  .service('PersonSvc', function ($http) {
+    return function PersonSvc (name) {
+      this.name = name;
+      this.create = function () {
+        return $http.post('/people', this);
+      };
+    };
+  });
