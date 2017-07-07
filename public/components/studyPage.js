@@ -64,20 +64,46 @@ angular.module('flash-card')
     resetConditionToInitialState['handlePrev'](this);
   };
 
-  this.rateCard = (status) => {
+  this.rateCard = (status, $event) => {
     console.log('this.current.status before: ', this.current.status);
     this.current.status = status;
     console.log('this.current.status after: ', this.current.status);
-    // console.log('this.current: ', this.current);
-    // console.log('this.deck: ', this.deck);
+
+    $event.stopPropagation();
+    $event.preventDefault();
   }
 
+  this.resetState = () => {
+    this.showPrev = false;
+    if(this.shuffledDeck.length === 1) {
+      this.showNext = false;
+    } else {
+      this.showNext = true;
+    }
+
+    this.current = this.shuffledDeck[0];
+    this.front = true;
+    this.flipped = false;
+
+    this.counter = 0;
+
+  };
+
   this.toggleCardsViewed = (view) => {
-    console.log('THIS DECK', this.shuffledDeck)
-    var currentDeck = this.shuffleDeck;
-    currentDeck.forEach(function(card) {
-       console.log(card)
-    })
+
+    if (view === "hide") {
+      var viewCard = this.shuffledDeck.filter(function(card) {
+        return (card.status === false)
+      });
+
+      this.shuffledDeck = viewCard;
+      this.resetState();
+      console.log('show matching', this.shuffledDeck)
+    } else {
+      this.shuffledDeck = shuffleDeck(this.deck.cards);
+      this.resetState();
+      console.log('show all', this.shuffledDeck)
+    }
 
   };
 

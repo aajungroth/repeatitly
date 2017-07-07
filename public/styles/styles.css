@@ -172,3 +172,29 @@ form > * {
 .options {
   float: right;
 }
+
+.btn {
+  border-radius: 10px;
+}
+
+.green {
+  border: 4px solid #5cb85c;
+  border-radius: 10px;
+}
+
+.red {
+  border: 4px solid #d9534f;
+  border-radius: 10px;  
+}
+
+.btn:focus {
+  outline:none;
+}
+
+.green:focus {
+  outline:none;
+}
+
+.red:focus {
+  outline:none;
+}
