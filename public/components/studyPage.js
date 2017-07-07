@@ -68,10 +68,9 @@ angular.module('flash-card')
     console.log('this.current.status before: ', this.current.status);
     this.current.status = status;
     console.log('this.current.status after: ', this.current.status);
+
     $event.stopPropagation();
     $event.preventDefault();
-    // console.log('this.current: ', this.current);
-    // console.log('this.deck: ', this.deck);
   }
 
   this.resetState = () => {
