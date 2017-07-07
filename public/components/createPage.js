@@ -63,11 +63,23 @@ angular.module('flash-card')
   };
 
   this.toggleHighlightFront = function(card) {
-    card.plaintextFront = !card.plaintextFront;
+
+    if (card) {
+      card.plaintextFront = !card.plaintextFront;
+    } else {
+      console.log('No card exist yet', this.newCard.plaintextFront)
+      this.newCard.plaintextFront = !this.newCard.plaintextFront;
+    }
+
   };
 
   this.toggleHighlightBack = function(card) {
-    card.plaintextBack = !card.plaintextBack;
+    if (card) {
+      card.plaintextBack = !card.plaintextBack;
+    } else {
+      console.log('No card exist yet', this.newCard.plaintextBack)
+      this.newCard.plaintextBack = !this.newCard.plaintextBack;
+    }
   };
 
 })
