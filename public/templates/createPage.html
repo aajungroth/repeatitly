@@ -6,12 +6,25 @@
     <div class="row">
       <div class="col-xs-5 flashcard">
         <h4>Question</h4>
+        <div class="codeToggleBtn">
+          <button ng-click="create.toggleHighlightFront(card)" ng-class="{'btn': create.newCard.plaintextFront, 'btn btn-primary': !create.newCard.plaintextFront}">
+            <span class="fa fa-code"></span>
+          </button>
+        </div>New card is
+        {{create.newCard.plaintTextFront}}
         <hr>
+
         <textarea placeholder="Enter a question" ng-model="create.newCard.front" id="createQuestionField"></textarea>
       </div>
 
       <div class="col-xs-5 flashcard">
         <h4>Answer</h4>
+        <div class="codeToggleBtn">
+          <button ng-click="create.toggleHighlightBack(card)" ng-class="{'btn': create.newCard.plaintextBack, 'btn btn-primary': !create.newCard.plaintextBack}">
+            <span class="fa fa-code"></span>
+          </button>
+        </div>New card is
+        {{create.newCard.plaintTextFront}}
         <hr>
         <textarea placeholder="Enter the answer" ng-keyup="$event.keyCode == 13 && create.addCard(create.newCard)" ng-model="create.newCard.back"></textarea>
       </div>
