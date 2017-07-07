@@ -4,6 +4,7 @@ angular.module('flash-card')
     this.newCard = {plaintextFront: true, plaintextBack: true, status: false};
     //***** add more of the default schema ****
     this.deck = JSON.parse(localStorage.getItem('currentDeck'));
+    this.currentUser = localStorage.getItem('currentUser');
     this.addCard = function(newCard) {
       if(!newCard.front || !newCard.back) {
         alert("Please fill out a card");

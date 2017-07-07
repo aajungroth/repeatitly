@@ -14,7 +14,7 @@ angular.module('flash-card')
   //Grab the entire deck object so we have access to the deck id for saving later
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
   this.shuffledDeck = shuffleDeck(this.deck.cards);
-
+  this.currentUser = localStorage.getItem('currentUser');
   this.showPrev = false;
   if(this.shuffledDeck.length === 1) {
     this.showNext = false;

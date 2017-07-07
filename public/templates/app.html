@@ -20,8 +20,10 @@
           <td>{{ deck.deckname }}</td>
           <td>
             <span><a href="/study" ng-click="app.getDeck(deck)"><button class="btn btn-primary">Study</button></a></span>
-            <span><a href="/edit"><button class="btn btn-info" ng-click="app.getDeck(deck)">Edit</button></a></span>
-            <span><button class="btn btn-danger" ng-click="app.handleDelete(deck)">Delete</button></span>
+            <span ng-if="deck.public === false || app.currentUser === deck.username">
+              <span><a href="/edit" ><button class="btn btn-info" ng-click="app.getDeck(deck)">Edit</button></a></span>
+              <span><button class="btn btn-danger" ng-click="app.handleDelete(deck)">Delete</button></span>
+            </span>
           </td>
         </tr>
 

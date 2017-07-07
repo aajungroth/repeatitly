@@ -7,7 +7,10 @@
       <i class="fa fa-plus-circle" id="parentOfOnClickShowSavedForUserSide" ng-click="edit.handleEditAndSave();" >
         <span ng-show="edit.showme" id="onClickShowSavedForUserSide">saved</span>
       </i>
-      <label><input id="publicCheck" type="checkbox" ng-model="edit.deck.public"> Make deck public</label>
+      <span ng-if="edit.currentUser === edit.deck.username">
+
+        <label><input id="publicCheck" type="checkbox" ng-model="edit.deck.public"> Make deck public</label>
+      </span>
     </h3>
   </div>
     <div class="row">
