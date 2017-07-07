@@ -1,6 +1,6 @@
 angular.module('flash-card')
 
-.controller('LoginCtrl', function(loginSvc, $location, $http){
+.controller('LoginCtrl', function(loginSvc, $location, $http, $scope){
 
   this.login = function() {
     console.log('trying to signin frontend');
@@ -57,6 +57,27 @@ angular.module('flash-card')
       }
     });
   };
+
+  var init = function() {
+    $.ajax({
+        url: '/sessionDecks',
+        type: 'GET',
+        success: function(data) {
+          console.log(data);
+          if (data.length) {
+            localStorage.setItem('currentUser', data[0].username);
+            localStorage.setItem('decks', JSON.stringify(data));
+            $location.path('/app');
+            $scope.$apply();
+          }
+        },
+        error: function(err) {
+          console.log('no valid session', err)
+        }
+    });
+  };
+
+  init();
 })
 
 .component('login', {

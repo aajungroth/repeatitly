@@ -8,18 +8,36 @@ var bodyParser = require('body-parser');
 
 
 router.use(function(req, res, next) {
+  console.log('req.method', req.method, 'req.url', req.url);
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 });
 
+//redirects from app to index
+router.get('/app', function(req, res) {
+  res.redirect('/');
+});
+
+//get the decks when the app first loads
+  //if the user has a valid session
+router.get('/sessionDecks', function(req, res) {
+  console.log('req.session', req.session);
+  if ((req.session) && (req.session.username)) {
+      res.redirect('/decks');
+  } else {
+    res.status(401)
+    res.send();
+  }
+});
+
 //retrieve all decks
 router.get('/decks', function(req, res) {
   console.log('get decks query: ',req.query);
-  var username = req.query.username;
-  if (req.query.username === 'null') {
-    var username = null;
+  var username = req.query.username || req.session.username;
+  if (username === 'null') {
+    username = null;
   }
   console.log('username', username);
   var params = [];
@@ -27,8 +45,8 @@ router.get('/decks', function(req, res) {
     req.query.showUser = 'true';
   }
   if (req.query.showUser === 'true') {
-    console.log('setting user to ', req.query.username);
-    params.push({username: req.query.username});
+    console.log('setting user to ', username);
+    params.push({username: username});
   } else {
     console.log('not showing user');
     params.push({username: null});
@@ -120,37 +138,6 @@ router.delete('/users/:id', function(req, res) {
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 
-router.get('/', function(req, res) {
-  if (req.session) {
-    if ((req.sessoin.username) && (req.session.password)) {
-      redirect('/login');
-    }
-  }
-});
-
-router.get('/login', function(req, res) {
-  console.log('login post attempt');
-
-  UserFile.User.findOne({
-    username: req.session.username
-  }).then(function(user) {
-    if (user !== null) {
-      bcrypt.compare(req.session.password, user.password, function(err, result) {
-        if (result === true) {
-          console.log('user authenticated');
-          res.status(200).json('OK');
-        } else {
-          console.log('invalid user/password combo');
-          res.status(200).json('NO');
-        }
-      });
-    } else {
-      console.log('invalid username');
-      res.json('NO');
-    }
-  });
-});
-
 router.post('/login', function(req, res) {
   console.log('login post attempt');
 
@@ -161,9 +148,8 @@ router.post('/login', function(req, res) {
       bcrypt.compare(req.body.password, user.password, function(err, result) {
         if (result === true) {
           console.log('user authenticated');
-          if ((!req.session.username) || (!req.session.username)) {
+          if (!req.session.username) {
             req.session.username = req.body.username;
-            req.session.password = req.body.passowrd;
           }
           res.status(200).json('OK');
         } else {

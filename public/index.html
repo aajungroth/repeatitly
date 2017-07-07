@@ -63,7 +63,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a id="home-btn" href="/app">Home</a></li>
           <li><a id="create-btn" href="/create">Create a new deck</a></li>
-          <li><a id="logout-btn" href="/logout">Log out</a></li>
+          <li><a id="logout-btn" href="#">Log out</a></li>
         </ul>
       </div>
     </div>
@@ -95,36 +95,47 @@
         }
       });
     };
-
-    $('#logo').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
+    $(document).ready(function() {
+      $('#logo').on('click', function() {
+        console.log('logo click');
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
+        }
+      });
+      $('#home-btn').on('click', function() {
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
+        }
+      });
+      $('#create-btn').on('click', function() {
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
+        }
+      });
+      $('#logout-btn').on('click', function() {
+        //console.log('click');
+        localStorage.clear();
+        $.ajax({
+          url: '/logout',
+          type: 'GET',
+          success: function(data) {
+            //console.log(data);
+            window.location.replace('/');
+          }
         });
-      }
-    });
-    $('#home-btn').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
-        });
-      }
-    });
-    $('#create-btn').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
-        });
-      }
-    });
-    $('#logout-btn').on('click', function() {
-      localStorage.clear();
+      });
     });
   </script>
 

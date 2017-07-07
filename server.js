@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 
 //change name after we change the placeholder.js
 var db = require('./db/config');
-console.log('db', db);
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 
