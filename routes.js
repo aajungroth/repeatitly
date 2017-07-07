@@ -20,6 +20,26 @@ router.get('/app', function(req, res) {
   res.redirect('/');
 });
 
+//redirects from create to index
+router.get('/create', function(req, res) {
+  res.redirect('/');
+});
+
+//redirects from public to index
+router.get('/public', function(req, res) {
+  res.redirect('/');
+});
+
+//redirects from edit to index
+router.get('/edit', function(req, res) {
+  res.redirect('/');
+});
+
+//redirects from study to index
+router.get('/study', function(req, res) {
+  res.redirect('/');
+});
+
 //get the decks when the app first loads
   //if the user has a valid session
 router.get('/sessionDecks', function(req, res) {
