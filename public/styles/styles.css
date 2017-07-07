@@ -1,5 +1,6 @@
 body {
   font-family: 'Raleway', sans-serif;
+  padding-top: 70px;
 }
 
 li {
@@ -199,4 +200,8 @@ form > * {
 
 .red:focus {
   outline:none;
+}
+
+.thumb {
+  padding: 30px;
 }
