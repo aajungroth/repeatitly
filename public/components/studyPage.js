@@ -84,13 +84,12 @@ angular.module('flash-card')
     this.current = this.shuffledDeck[0];
     this.front = true;
     this.flipped = false;
-
     this.counter = 0;
 
   };
 
   this.toggleCardsViewed = (view) => {
-
+    console.log(view)
     if (view === "hide") {
       var viewCard = this.shuffledDeck.filter(function(card) {
         return (card.status === false)

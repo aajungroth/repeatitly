@@ -18,6 +18,12 @@
     <div class="divParent">
       <div class="text-center col-xs-4">
         <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default btn-warning" id="reset" ng-click="study.toggleCardsViewed(viewStatus)">Restart</button>
+        </div>
+      </div>
+
+      <div class="text-center col-xs-4">
+        <div class="btn-group" role="group">
         <button type="button" class="btn btn-default btn-info" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button>
         <button type="button" class="btn btn-default btn-primary" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button>
         </div>
