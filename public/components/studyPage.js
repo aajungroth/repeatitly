@@ -66,14 +66,11 @@ angular.module('flash-card')
 
   this.rateCard = (status, $event) => {
     console.log('this.current.status before: ', this.current.status);
-    this.current.status = true;
+    this.current.status = status;
     console.log('this.current.status after: ', this.current.status);
+
     $event.stopPropagation();
     $event.preventDefault();
-    // console.log('this.current: ', this.current);
-    // console.log('this.deck: ', this.deck);
-    console.log('this.current: ', this.current);
-    console.log('this.deck: ', this.deck);
   }
 
   this.resetState = () => {
