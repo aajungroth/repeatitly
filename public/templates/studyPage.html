@@ -1,7 +1,7 @@
 <div ng-controller="StudyCtrl as study">
 
   <div class="flip">
-    <div class="card panel panel-default" ng-class="{'flipped':study.flipped}" ng-click="study.handleFlip()">
+    <div class="card panel panel-default" ng-class="{'flipped':study.flipped}" ng-click="study.handleFlip()" tabindex="1" ng-keyup="study.handleKeyUp($event)" ng-init="study.setFocus()" ng-blur="study.setFocus()" id="testCard">
       <div class="studycard face front panel-body" ng-if="study.front"><h3>{{ study.current.front }}</h3></div>
       <div class="studycard face back panel-body" ng-if="!study.front"><h3>{{ study.current.back }}</h3>
         <div class="thumb">

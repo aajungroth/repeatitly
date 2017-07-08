@@ -1,6 +1,8 @@
 body {
   font-family: 'Raleway', sans-serif;
   padding-top: 70px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 li {
@@ -204,4 +206,8 @@ form > * {
 
 .thumb {
   padding: 30px;
+}
+
+.card:focus {
+  outline:none;
 }
