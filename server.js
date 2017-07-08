@@ -10,7 +10,6 @@ var db = require('./db/config');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 
-
 var store = new MongoDBStore({
   uri: db.mongooseURI,
   collection: 'sessions'
@@ -29,15 +28,6 @@ var specialHashRegex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
-app.use(session({
-  secret: 'This is a secret',
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7
-  },
-  store: store,
-  resave: true,
-  saveUninitialized: true
-}));
 
 app.use(require('./routes'));
 
