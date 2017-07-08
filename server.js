@@ -19,7 +19,7 @@ var store = new MongoDBStore({
 store.on('error', function(error) {
   assert.ifError(error);
   assert.ok(false);
-  console.errror(error);
+  console.error(error);
 });
 
 // see end of routes.js for description
@@ -28,6 +28,15 @@ var specialHashRegex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+app.use(session({
+  secret: 'This is a secret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  },
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
 
 app.use(require('./routes'));
 
