@@ -4,6 +4,18 @@ angular.module('flash-card')
   this.currentUser = localStorage.getItem('currentUser');
   this.showSelfDecks = true;
   this.showPublicDecks = false;
+  this.duplicateDeck = function(deck) {
+    $http.post('/decks/duplicate', {
+      deckId: deck._id,
+      newUsername: that.currentUser
+    }).then(function(res) {
+      console.log('receieved response', res, res.status);
+      that.updateDecks();
+    }, function(error) {
+      console.log('error on duplicating deck');
+    });
+
+  };
   this.updateDecks = function() {
     $http.get('/decks', {
         params: {username: this.currentUser,
@@ -11,9 +23,9 @@ angular.module('flash-card')
             showPublic: this.showPublicDecks
           }
         }).then(function(response) {
-          console.log('then callback of updateDecks',localStorage.getItem('decks'));
+          // console.log('then callback of updateDecks',localStorage.getItem('decks'));
           localStorage.setItem('decks', JSON.stringify(response.data));
-          console.log('after set localStorage');
+          // console.log('after set localStorage');
           that.setDecks();
         }, function(error) {console.error(error);});
   };

@@ -3,8 +3,10 @@ var router = express.Router();
 var UserFile = require('./db/models/user');
 var Card = require('./db/models/card');
 var Deck = require('./db/models/deck');
+var cardPropsToDuplicate = ['back','front','lang', 'plaintextBack', 'plaintextFront', 'status'];
 
 var bodyParser = require('body-parser');
+
 
 
 router.use(function(req, res, next) {
@@ -100,6 +102,33 @@ router.post('/decks', function(req, res) {
     // console.log('DECK', deck); => CONFIRMS THAT DECK IS SAVED SUCCESSFULLY
     res.json(deck);
   });
+});
+
+router.post('/decks/duplicate', function(req, res) {
+  console.log('dupe deck call',req.query, req.body);
+
+  Deck.find({_id: req.body.deckId}, function(err, result) {
+    var newCards = [];
+    var newDeck = {};
+    newDeck.deckname = result[0].deckname;
+    newDeck.username = req.body.newUsername;
+    result[0]['cards'].map(function(curCard) {
+      var strippedCard = {};
+      cardPropsToDuplicate.map(function (curCardKey) {
+        strippedCard[curCardKey] = curCard[curCardKey];
+      });
+      newCards.push(strippedCard);
+    });
+    newDeck.cards = newCards;
+
+    Deck.create(newDeck, function(err2, result2) {
+      console.log('-------');
+      console.log('duplicated deck', req.body.deckId, 'to: ', result2._id);
+      res.status(200).send('duplicated deck', req.body.deckId, 'to: ', result2._id);
+
+    })
+  });
+
 });
 
 router.put('/decks/', function(req, res) {
