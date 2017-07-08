@@ -20,7 +20,7 @@ var store = new MongoDBStore({
 store.on('error', function(error) {
   assert.ifError(error);
   assert.ok(false);
-  console.errror(error);
+  console.error(error);
 });
 
 // see end of routes.js for description
