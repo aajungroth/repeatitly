@@ -103,7 +103,6 @@ angular.module('flash-card')
       this.resetState();
       console.log('show all', this.shuffledDeck)
     }
-
   };
 
   this.handleFlip = () => {
@@ -116,6 +115,19 @@ angular.module('flash-card')
       this.highlightingHelperFn(this.current.back);
     }
   };
+
+  this.setFocus = () => {
+    var focusedElement = document.getElementById('testCard');
+    focusedElement.focus();
+  };
+
+  this.handleKeyUp = ($event) => {
+    if ($event.keyCode === 39 && this.showNext) {
+      this.handleNext();
+    } else if ($event.keyCode === 37 && this.showPrev) {
+      this.handlePrev();
+    }
+  }
 
   //-------------------------------------------------------------------------------------
   /*  This function essentially:
