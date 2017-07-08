@@ -45,7 +45,7 @@ router.get('/study', function(req, res) {
 //get the decks when the app first loads
   //if the user has a valid session
 router.get('/sessionDecks', function(req, res) {
-  console.log('req.session', req.session);
+  console.log('>>>>>>>>>>>>>>>>>>>> session decks req.session >>>>>>>>>>>>>', req.session);
   if ((req.session) && (req.session.username)) {
       res.redirect('/decks');
   } else {
@@ -197,10 +197,21 @@ router.post('/login', function(req, res) {
       bcrypt.compare(req.body.password, user.password, function(err, result) {
         if (result === true) {
           console.log('user authenticated');
+          console.log('req.session: ', req.session);
           if (!req.session.username) {
-            req.session.username = req.body.username;
+            req.session.regenerate(function(err) {
+              if (err) {
+                console.log('error: ', err);
+              } else {
+                req.session.username = req.body.username;
+                req.session.save();
+                console.log('req.session: ', req.session);
+                res.status(200).json('OK');
+              }
+            });
+          } else {
+            res.status(200).json('OK');
           }
-          res.status(200).json('OK');
         } else {
           console.log('invalid user/password combo');
           res.status(200).json('NO');
@@ -239,8 +250,15 @@ router.post('/signup', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
+  delete req.session.username;
+  console.log('before newnew@@@@@@@@@@@@@@@@@@@@ req.session: @@@@@@@@@@@@@@@@@@@', req.session);
+  req.session.regenerate(function() {
+    res.redirect('/');    
+    //req.session.username = null;
+    console.log('after newnew@@@@@@@@@@@@@@@@@@@@ req.session: @@@@@@@@@@@@@@@@@@@', req.session);
+  });
+
+
 });
 // (╯°□°）╯︵ ┻━┻       (you don't actually need it for anything. it was a joke)
 
