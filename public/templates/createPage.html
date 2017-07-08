@@ -10,8 +10,7 @@
           <button ng-click="create.toggleHighlightFront(card)" ng-class="{'btn': create.newCard.plaintextFront, 'btn btn-primary': !create.newCard.plaintextFront}">
             <span class="fa fa-code"></span>
           </button>
-        </div>New card is
-        {{create.newCard.plaintTextFront}}
+        </div>
         <hr>
 
         <textarea placeholder="Enter a question" ng-model="create.newCard.front" id="createQuestionField"></textarea>
@@ -23,8 +22,7 @@
           <button ng-click="create.toggleHighlightBack(card)" ng-class="{'btn': create.newCard.plaintextBack, 'btn btn-primary': !create.newCard.plaintextBack}">
             <span class="fa fa-code"></span>
           </button>
-        </div>New card is
-        {{create.newCard.plaintTextFront}}
+        </div>
         <hr>
         <textarea placeholder="Enter the answer" ng-keyup="$event.keyCode == 13 && create.addCard(create.newCard)" ng-model="create.newCard.back"></textarea>
       </div>
