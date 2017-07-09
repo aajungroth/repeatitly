@@ -65,9 +65,7 @@ angular.module('flash-card')
   };
 
   this.rateCard = (status, $event) => {
-    console.log('this.current.status before: ', this.current.status);
     this.current.status = status;
-    console.log('this.current.status after: ', this.current.status);
 
     $event.stopPropagation();
     $event.preventDefault();
@@ -89,7 +87,6 @@ angular.module('flash-card')
   };
 
   this.toggleCardsViewed = (view) => {
-    console.log(view)
     if (view === "hide") {
       var viewCard = this.shuffledDeck.filter(function(card) {
         return (card.status === false)
@@ -122,10 +119,30 @@ angular.module('flash-card')
   };
 
   this.handleKeyUp = ($event) => {
+    var viewDown = document.getElementById('viewDown');  
+    var viewAll = document.getElementById('viewAll');
+
     if ($event.keyCode === 39 && this.showNext) {
       this.handleNext();
     } else if ($event.keyCode === 37 && this.showPrev) {
       this.handlePrev();
+    } else if ($event.keyCode === 32) {
+      this.handleFlip();
+    } else if ($event.keyCode === 85) {
+      this.rateCard(true, $event);
+    } else if ($event.keyCode === 68) {
+      this.rateCard(false, $event);
+    } else if ($event.keyCode === 83) {
+      this.handleSave();
+    } else if ($event.keyCode === 82) {
+      var view = viewDown.checked ? 'hide' : 'viewAll';
+      this.toggleCardsViewed(view);
+    } else if ($event.keyCode === 65) {
+      viewAll.checked = true;      
+      this.toggleCardsViewed('viewAll');
+    } else if ($event.keyCode === 78) {
+      viewDown.checked = true;
+      this.toggleCardsViewed('hide');
     }
   }
 
