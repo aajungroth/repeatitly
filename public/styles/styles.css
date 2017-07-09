@@ -54,8 +54,7 @@ td {
   margin: 0 auto;
   width: 50%;
   text-align: center;
-  min-height: 20em;
-  /*height: 20em;*/
+  height: 20em;
   padding: 3em;
 }
 
@@ -205,14 +204,10 @@ form > * {
   outline:none;
 }
 
-.thumbsbutton {
-  bottom: 20px;
-  align-self: flex-end;
-}
-
 .thumb {
+  /*padding: 30px;*/
   display: flex;
-  justify-content: center;
+  justify-content:center;
 }
 
 .card:focus {
