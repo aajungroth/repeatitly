@@ -211,11 +211,10 @@ form > * {
 }
 
 .thumb {
-  /*padding: 30px;*/
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
 
 .card:focus {
-  outline:none;
+  outline: none;
 }
