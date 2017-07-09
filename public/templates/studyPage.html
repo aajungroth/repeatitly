@@ -5,10 +5,10 @@
       <div class="studycard face front panel-body" ng-if="study.front"><h3>{{ study.current.front }}</h3></div>
       <div class="studycard face back panel-body" ng-if="!study.front"><h3>{{ study.current.back }}</h3>
         <div class="thumb">
-          <button class="btn" ng-click="study.rateCard(true, $event)" ng-class="{'green' : study.current.status}">
+          <button class="btn thumbsbutton" ng-click="study.rateCard(true, $event)" ng-class="{'green' : study.current.status}">
             <span class="glyphicon glyphicon-thumbs-up btn"></span>
           </button>
-          <button class="btn" ng-click="study.rateCard(false, $event)" ng-class="{'red' : !study.current.status}">
+          <button class="btn thumbsbutton" ng-click="study.rateCard(false, $event)" ng-class="{'red' : !study.current.status}">
             <span class="glyphicon glyphicon-thumbs-down btn"></span>
         </button>
         </div>

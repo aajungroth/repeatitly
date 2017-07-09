@@ -44,17 +44,7 @@ angular.module('flash-card')
   if (confirm('Are you sure you want to delete this deck?')) {
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
-      $http.get('/decks', {
-        params: {
-          username: this.currentUser
-        }
-      }).then(function(res) {
-        localStorage.setItem('decks', JSON.stringify(res.data));
-        that.decks = res.data;
-        console.log('inside handle delete', localStorage.getItem('decks'));
-      }, function(error) {
-        console.error(error);
-      });
+      that.updateDecks();
     }, function(error) {
       console.error(error);
     });
