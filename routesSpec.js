@@ -1,15 +1,23 @@
+require('dotenv').config();
 var request = require('supertest');
 var express = require('express');
 var expect = require('chai').expect;
 var routes = require('./routes.js');
-
+// var mongoose = require('mongoose');
+var db = require('./db/config.js');
+// var dbURI = require('./db/config.js');
 var User = require('./db/models/user.js');
 var Deck = require('./db/models/deck.js');
 var Card = require('./db/models/card.js');
 
+// var db = mongoose.createConnection(dbURI.mongooseURI, {
+//   "useMongoClient": true
+// });
+
 describe('Routes', function() {
 
   beforeEach(function(done) {
+
     done();
   });
 
@@ -25,49 +33,50 @@ describe('Routes', function() {
     });
 
     it('should something', function(done) {
+
       done();
     });
 
   });
 
-  describe('SignUp', function() {
+  // describe('SignUp', function() {
 
-    beforeEach(function(done) {
-      done();
-    });
+  //   beforeEach(function(done) {
+  //     done();
+  //   });
 
-  });
+  // });
 
-  describe('Logout', function() {
+  // describe('Logout', function() {
 
-    beforeEach(function(done) {
-      done();
-    });
+  //   beforeEach(function(done) {
+  //     done();
+  //   });
 
-  });
+  // });
 
-  describe('Decks', function() {
+  // describe('Decks', function() {
 
-    beforeEach(function(done) {
-      done();
-    });
+  //   beforeEach(function(done) {
+  //     done();
+  //   });
 
-  });
+  // });
 
-  describe('Users', function() {
+  // describe('Users', function() {
 
-    beforeEach(function(done) {
-      done();
-    });
+  //   beforeEach(function(done) {
+  //     done();
+  //   });
 
-  });
+  // });
 
-  describe('Sessions', function() {
+  // describe('Sessions', function() {
 
-    beforeEach(function(done) {
-      done();
-    });
+  //   beforeEach(function(done) {
+  //     done();
+  //   });
 
-  });
+  // });
 
 });

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "karma start",
-    "testBackEnd": "node routesSpec.js",
+    "mochatest": "mocha routesSpec.js",
     "start": "node server.js",
     "lint": "eslint ./"
   },

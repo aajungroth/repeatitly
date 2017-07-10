@@ -12,7 +12,7 @@ var MongoDBStore = require('connect-mongodb-session')(session);
 
 
 var store = new MongoDBStore({
-  uri: db.mongooseURI,
+  uri: process.env.MONGODB_URI,
   collection: 'sessions'
 });
 
