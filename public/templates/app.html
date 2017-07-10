@@ -1,8 +1,8 @@
 <div ng-controller="AppCtrl as app" class="container">
   <h3>Choose a deck</h3>
   <div id="checkboxes">
-    <label><input type="checkbox" name="selfDeckFilter" ng-model="app.showSelfDecks" ng-click="app.updateDecks()" checked> Show own decks</label>
-    <label><input type="checkbox" name="publicDeckFilter" ng-model="app.showPublicDecks" ng-click="app.updateDecks()"> Show public decks</label>
+    <label><input type="checkbox" id="selfDeckFilter" ng-model="app.showSelfDecks" ng-click="app.updateDecks()"> Show own decks</label>
+    <label><input type="checkbox" id="publicDeckFilter" ng-model="app.showPublicDecks" ng-click="app.updateDecks()" > Show public decks</label>
   </div>
   <!-- responsive row containing table and spacer -->
   <div class="col-xs-12 col-md-12">

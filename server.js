@@ -10,6 +10,7 @@ var db = require('./db/config');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 
+
 var store = new MongoDBStore({
   uri: db.mongooseURI,
   collection: 'sessions'

@@ -17,6 +17,10 @@ angular.module('flash-card')
 
   };
   this.updateDecks = function() {
+    localStorage.setItem('showOwnDecks', that.showSelfDecks);
+    localStorage.setItem('showPublicDecks', that.showPublicDecks);
+    console.log('setting checkboxes', that.showSelfDecks, that.showPublicDecks);
+
     $http.get('/decks', {
         params: {username: this.currentUser,
             showUser: this.showSelfDecks,
@@ -27,6 +31,8 @@ angular.module('flash-card')
           localStorage.setItem('decks', JSON.stringify(response.data));
           // console.log('after set localStorage');
           that.setDecks();
+          $('#selfDeckFilter').prop('checked', that.showSelfDecks);
+          $('#publicDeckFilter').prop('checked', that.showPublicDecks);
         }, function(error) {console.error(error);});
   };
   this.alert = function() {
@@ -57,6 +63,7 @@ angular.module('flash-card')
   } else {
     this.setDecks();
   }
+  that.updateDecks();
 })
 .component('app', {
   controller: 'AppCtrl',

@@ -15,6 +15,8 @@ angular.module('flash-card')
         $http.get('/decks', {params: {username: loginName}}).then(function(response) {
           localStorage.setItem('currentUser', loginName);
           localStorage.setItem('decks', JSON.stringify(response.data));
+          localStorage.setItem('showOwnDecks', true);
+          localStorage.setItem('showPublicDecks', false);
           $location.path('/app');
         }, function(error) {console.log('lol its an error gg'); console.error(error);});
       } else if (res.data === 'NO') {
