@@ -1,6 +1,6 @@
 angular.module('flash-card')
 .controller('StudyCtrl', function($http, $location, $timeout) {
-
+  var that = this;
   var shuffleDeck = function(deck) {
     for (var i = 0; i < deck.length; i++) {
       var random = Math.floor(Math.random()*(deck.length-i)) + i;
@@ -30,29 +30,32 @@ angular.module('flash-card')
 
   var resetConditionToInitialState = {
     'handleNext' : function (studyControllerVariables) {
-      var that = studyControllerVariables;
+      //var that = studyControllerVariables;
       if (that.counter === that.shuffledDeck.length - 2) {
         that.showNext = false;
       }
       that.showPrev = true;
       that.counter++;
-      this.setToInitialState(studyControllerVariables);
+      this.setToInitialState(that);
+      //that.highlightCodeBlocks();
     },
     'handlePrev' : function (studyControllerVariables) {
-      var that = studyControllerVariables;
+      //var that = studyControllerVariables;
       if (that.counter - 1 === 0) {
         that.showPrev = false;
       }
       that.showNext = true;
       that.counter--;
-      this.setToInitialState(studyControllerVariables);
+      this.setToInitialState(that);
+      //that.highlightCodeBlocks();
     },
     'setToInitialState' : function (studyControllerVariables) {
-      var that = studyControllerVariables;
+      //var that = studyControllerVariables;
       that.front = true;
       that.flipped = false;
       that.current = that.shuffledDeck[that.counter];
-      that.highlightingHelperFn(that.current.front);
+      //that.highlightingHelperFn(that.current.front);
+      //that.highlightCodeBlocks();
     }
   }
 
@@ -101,16 +104,27 @@ angular.module('flash-card')
       console.log('show all', this.shuffledDeck)
     }
   };
+  this.highlightCodeBlocks = () => {
+    if (this.front === true && this.flipped === false) {
 
+      //hljs.highlightBlock($('#frontCode'));
+      //hljs.highlightBlock(document.getElementById('frontCode'));
+      //hljs.highlightBlock("pre");
+      $('#frontCode').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    } else {
+      //hljs.highlightBlock($('#backCode'));
+      $('#backCode').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    }
+  };
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
+    that.highlightCodeBlocks();
 
-    if (this.front === true && this.flipped === false) {
-      this.highlightingHelperFn(this.current.front);
-    } else {
-      this.highlightingHelperFn(this.current.back);
-    }
   };
 
   this.setFocus = () => {
@@ -119,7 +133,7 @@ angular.module('flash-card')
   };
 
   this.handleKeyUp = ($event) => {
-    var viewDown = document.getElementById('viewDown');  
+    var viewDown = document.getElementById('viewDown');
     var viewAll = document.getElementById('viewAll');
 
     if ($event.keyCode === 39 && this.showNext) {
@@ -138,7 +152,7 @@ angular.module('flash-card')
       var view = viewDown.checked ? 'hide' : 'viewAll';
       this.toggleCardsViewed(view);
     } else if ($event.keyCode === 65) {
-      viewAll.checked = true;      
+      viewAll.checked = true;
       this.toggleCardsViewed('viewAll');
     } else if ($event.keyCode === 78) {
       viewDown.checked = true;
@@ -160,6 +174,7 @@ angular.module('flash-card')
    *  or 'previous' buttons are clicked, and when the very first card is loaded for the
    *  study session.
    */
+
   this.highlightingHelperFn = (flashCardQuestion) => {
     $timeout(() => {
 
@@ -220,5 +235,5 @@ angular.module('flash-card')
   };
 
   // initialize the first card to check for whether to highlight
-  this.highlightingHelperFn();
+  //this.highlightingHelperFn();
 });

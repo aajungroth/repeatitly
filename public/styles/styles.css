@@ -218,3 +218,10 @@ form > * {
 .card:focus {
   outline: none;
 }
+
+.codeStyle {
+  padding: 10px;
+  text-align: left;
+  overflow: hidden;
+  overflow-y: scroll;
+}
